@@ -6,7 +6,7 @@ using System.Collections;
 //NEED TO FIX BUG OF SHAKING BOX -> distance threshold overlaps with awayFromHome values 
 public class EnemyScript : MonoBehaviour {
 	public Transform player;
-public Waypoints waypoint;
+    public WayPointsScript waypoint;
     public float moveSpeed = 5.0f;
     public float distanceToPlayer = 10.0f;
     public float awayFromHome = 20.0f;
@@ -17,9 +17,10 @@ public Waypoints waypoint;
 	// Use this for initialization
 	void Start () 
     {
+        waypoint = FindObjectOfType<WayPointsScript>();
         moveDir = Vector3.zero;
         transform.position = waypoint.StartPosition();
-
+        player = GameObject.FindGameObjectWithTag("Player").gameObject.transform; 
 	}
 	
 	// Update is called once per frame
@@ -44,7 +45,9 @@ public Waypoints waypoint;
         }
 
         transform.position += moveDir * moveSpeed * Time.deltaTime; //update position	
-        transform.rotation = Quaternion.LookRotation(moveDir);//maipulate rotation, each time change direction, also moves rotation
+
+        //This is where the rotation is controlled
+        //transform.rotation = Quaternion.LookRotation(moveDir);//maipulate rotation, each time change direction, also moves rotation
     }
 	
 	void OnCollisionEnter(Collision col)
