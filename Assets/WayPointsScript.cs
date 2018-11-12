@@ -90,8 +90,8 @@ public class WayPointsScript : MonoBehaviour {
 	//To get the direction from current position of the enemy to the player
 	public Vector3 GetDirectionToPlayer (Transform _AI, Transform _player ) {
 		//Make sure that the y position equal to the waypoint y position
-		Vector3 v3_currentPosition = new Vector3(_AI.position.x, waypoints[int_wayIndex].position.y, _AI.position.z);
-		Vector3 v3_playerPosition = new Vector3(_player.position.x, waypoints[int_wayIndex].position.y, _player.position.z);
+		Vector3 v3_currentPosition = new Vector3(_AI.position.x, _AI.position.y, waypoints[int_wayIndex].position.z);
+		Vector3 v3_playerPosition = new Vector3(_player.position.x, _player.position.y, waypoints[int_wayIndex].position.z);
 		v3_direction = (v3_playerPosition - v3_currentPosition).normalized;
 		
 		return v3_direction;
