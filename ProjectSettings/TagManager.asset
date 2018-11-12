@@ -6,6 +6,7 @@ TagManager:
   tags:
   - AnxietyReliever
   - Ground
+  - pickUp
   layers:
   - Default
   - TransparentFX
