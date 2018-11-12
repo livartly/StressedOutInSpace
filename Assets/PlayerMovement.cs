@@ -38,7 +38,6 @@ public class PlayerMovement : MonoBehaviour {
             //if Grounded
             if (hit.transform.tag == "Ground")
             {
-                Debug.Log("Grounded");
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
                 {
                     rb.velocity = GetGravityDirection() * jumpForce * Time.deltaTime * 60;
@@ -76,13 +75,5 @@ public class PlayerMovement : MonoBehaviour {
         //Find Gravity Direction
         Vector3 gravityDir = (this.transform.position - planet.transform.position).normalized;       
         return gravityDir;
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.tag=="pickUp")
-        {
-            Destroy(collision.gameObject);
-        }
     }
 }
