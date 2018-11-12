@@ -77,4 +77,12 @@ public class PlayerMovement : MonoBehaviour {
         Vector3 gravityDir = (this.transform.position - planet.transform.position).normalized;       
         return gravityDir;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag=="pickUp")
+        {
+            Destroy(collision.gameObject);
+        }
+    }
 }
