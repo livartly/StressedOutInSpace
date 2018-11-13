@@ -7,14 +7,16 @@ public class MessageObject : MonoBehaviour {
     //Object declaration
     PickupObject message = new PickupObject("Message", "negitive");
 
+    public AnxietyBarScript anxietyLvl;
+
     //on collition
     private void OnCollisionEnter(Collision coll)
     {
         //if Player
         if (coll.gameObject.tag == "Player")
         {
-            //Print out object info
-            print(message.GetName() + '\n' + message.GetType());
+            //Add Anxiety level
+            anxietyLvl.AddAnxitey();
             //Delete player
             Destroy(gameObject);
         }
