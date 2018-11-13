@@ -154,5 +154,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
+  maxSpeed: 50
+  jumpForce: 10
   gravity: 10
-  planet: {fileID: 0}
+  raycastLength: 8
+  lm:
+    serializedVersion: 2
+    m_Bits: 0
+  planets: []

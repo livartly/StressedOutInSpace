@@ -10,12 +10,14 @@ public class PlayerMovement : MonoBehaviour {
 
     //Basic player settings
     public float speed = 10, maxSpeed = 50, jumpForce = 10, gravity = 1, raycastLength = 8f;
+    private float doubleJump = 1;
 
     //Layer Mask
     public LayerMask lm;
 
     //Use for current target later
-    public GameObject planet;
+    public GameObject[] planets;
+    private int closestIndex;
 
 	void Start () {
         //Grab the rigidbody componet
@@ -24,9 +26,16 @@ public class PlayerMovement : MonoBehaviour {
         //Invert Layermask Selection
         lm = ~lm;
         rb.useGravity = false;
-	}
+
+        GameObject[] numOfPlanets = GameObject.FindGameObjectsWithTag("Planet");
+        planets = new GameObject[numOfPlanets.Length];
+        for (int i = 0; i < numOfPlanets.Length; i++)
+        {
+            planets[i] = numOfPlanets[i];
+        }
+    }
 	
-	void Update () {
+	void FixedUpdate () {
 
         RaycastHit hit;
         //Draw The Raycast
@@ -36,10 +45,23 @@ public class PlayerMovement : MonoBehaviour {
         if (Physics.Raycast(transform.position, -GetGravityDirection(), out hit, raycastLength, lm))
         {
             //if Grounded
-            if (hit.transform.tag == "Ground")
+            if (hit.transform.tag == "Planet")
+            {
+                doubleJump = 1;
+                if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    rb.velocity = GetGravityDirection() * jumpForce * Time.deltaTime * 60;
+                    print("Jump");
+                }
+            }
+        }
+        else
+        {
+            if (doubleJump > 0)
             {
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
                 {
+                    doubleJump -= 1;
                     rb.velocity = GetGravityDirection() * jumpForce * Time.deltaTime * 60;
                     print("Jump");
                 }
@@ -55,25 +77,42 @@ public class PlayerMovement : MonoBehaviour {
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
 
         //Rotation Finding System
-        Vector3 relative = transform.InverseTransformPoint(planet.transform.position);
+        Vector3 relative = transform.InverseTransformPoint(planets[closestIndex].transform.position);
         var angle = Mathf.Atan2(relative.x, relative.y) * Mathf.Rad2Deg;
         transform.Rotate(0, 0, -angle);
 
         //Pull Towards Planet
         Gravity();
+        //Check Closest Planet
+        CheckClosestPlanet();
     }
 
     void Gravity() {
         //Move towards ground
         var holder = -GetGravityDirection() * gravity * Time.deltaTime * 60;
         rb.AddForce(holder);
-        //transform.position -= GetGravityDirection() * gravity * Time.deltaTime;
-        Debug.DrawRay(transform.position, -GetGravityDirection() * 10f, Color.blue);
+
+        //Draw the gravity vector
+        //Debug.DrawRay(transform.position, -GetGravityDirection() * 10f, Color.blue);
+    }
+
+    void CheckClosestPlanet() {
+
+        float distance = 9999;
+
+        for (int i = 0; i < planets.Length; i++)
+        {
+            if (distance > (transform.position - planets[i].transform.position).magnitude)
+            {
+                distance = (transform.position - planets[i].transform.position).magnitude;
+                closestIndex = i;
+            }
+        }
     }
 
     Vector3 GetGravityDirection() {
         //Find Gravity Direction
-        Vector3 gravityDir = (this.transform.position - planet.transform.position).normalized;       
+        Vector3 gravityDir = (this.transform.position - planets[closestIndex].transform.position).normalized;       
         return gravityDir;
     }
 }
