@@ -95,7 +95,7 @@ public class EZBuilder : MonoBehaviour {
                 empty.GetComponent<SpriteRenderer>().sprite = texture;
                 var XSize = empty.GetComponent<SpriteRenderer>().bounds.size.x;
                 var YSize = empty.GetComponent<SpriteRenderer>().bounds.size.y;
-                empty.layer = LayerNum;
+                //empty.layer = LayerNum;
                 empty.transform.position = new Vector2(pos.x * XSize + transform.position.x, pos.y * YSize + transform.position.y);
                 empty.transform.parent = gameObject.transform;
                 empty.tag = "ground";

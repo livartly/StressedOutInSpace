@@ -13,7 +13,7 @@ public class CameraFollowScript : MonoBehaviour {
         Vector3 changePos = player.transform.position;
 
         //Set the Z distance so it doesn't change
-        changePos.z = transform.position.z;
+        changePos.z = -20;
 
         transform.position = Vector3.Slerp(transform.position, changePos, Time.deltaTime * speed);
 	}

@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour {
     private Vector3 movement = Vector3.zero;
 
     //Basic player settings
-    public float speed = 10, maxSpeed = 50, jumpForce = 10, gravity = 1, raycastLength = 8f;
+    public float speed = 10, maxSpeed = 50, jumpForce = 10, gravity = 1, raycastLength = 8f, rotSpeed = 6;
     private float doubleJump = 1;
 
     //Layer Mask
@@ -37,6 +37,12 @@ public class PlayerMovement : MonoBehaviour {
 	
 	void FixedUpdate () {
 
+        //Rotation Finding System
+        Vector3 relative = transform.InverseTransformPoint(planets[closestIndex].transform.position);
+        var angle = Mathf.Atan2(relative.x, relative.y) * Mathf.Rad2Deg;
+
+
+        //Hit Componet
         RaycastHit hit;
         //Draw The Raycast
         Debug.DrawRay(transform.position, -GetGravityDirection() * raycastLength);
@@ -54,18 +60,30 @@ public class PlayerMovement : MonoBehaviour {
                     print("Jump");
                 }
             }
+            //If Grounded Rotate Faster
+            transform.Rotate(0, 0, -angle);
         }
         else
         {
+            //If double jump > 0 allow for a jump
             if (doubleJump > 0)
             {
+                //Check for the jump input
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
                 {
+                    //subtract the double jump ability number
                     doubleJump -= 1;
-                    rb.velocity = GetGravityDirection() * jumpForce * Time.deltaTime * 60;
-                    print("Jump");
+                    //Set velocity upwards
+                    rb.velocity = GetGravityDirection() * jumpForce * Time.deltaTime * 60;                      
+                    //print("Jump");
                 }
             }
+            //If airborn lerp rotation
+            //Store Rotation Quaternion
+
+            Vector3 rot = transform.eulerAngles;
+
+            transform.Rotate(0, 0, -angle);
         }
 
         //Left && Right Movement
@@ -75,11 +93,6 @@ public class PlayerMovement : MonoBehaviour {
 
         //Keep player zero'd on Z axis
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-
-        //Rotation Finding System
-        Vector3 relative = transform.InverseTransformPoint(planets[closestIndex].transform.position);
-        var angle = Mathf.Atan2(relative.x, relative.y) * Mathf.Rad2Deg;
-        transform.Rotate(0, 0, -angle);
 
         //Pull Towards Planet
         Gravity();
