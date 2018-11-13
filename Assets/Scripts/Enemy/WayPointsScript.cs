@@ -81,7 +81,7 @@ public class WayPointsScript : MonoBehaviour {
 		
 		//Get Direction from the current position of the character to the next way point
 		//Make sure that the y position equal to the waypoint y position
-		Vector3 v3_currentPosition = new Vector3(_AI.position.x, waypoints[int_nextIndex].position.y, _AI.position.z);
+        Vector3 v3_currentPosition = new Vector3(_AI.position.x, _AI.position.y, waypoints[int_nextIndex].position.z);
 		v3_direction = (waypoints[int_nextIndex].position - v3_currentPosition).normalized;
 		
 		return v3_direction;
