@@ -8,7 +8,7 @@ public class MessageObject : MonoBehaviour {
     PickupObject message = new PickupObject("Message", "negitive");
 
     public AnxietyBarScript anxietyLvl;
-
+    public ShowMessageScript textMessage;
     //on collition
     private void OnCollisionEnter(Collision coll)
     {
@@ -17,6 +17,10 @@ public class MessageObject : MonoBehaviour {
         {
             //Add Anxiety level
             anxietyLvl.AddAnxitey();
+
+            //Show Text Message
+            textMessage.ShowMessage();
+
             //Delete player
             Destroy(gameObject);
         }

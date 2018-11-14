@@ -18,8 +18,9 @@ public class PlayerMovement : MonoBehaviour {
     //Use for current target later
     public GameObject[] planets;
     private int closestIndex;
+    private Quaternion currRotation;
 
-	void Start () {
+    void Start () {
         //Grab the rigidbody componet
         rb = GetComponent<Rigidbody>();
 
@@ -57,7 +58,7 @@ public class PlayerMovement : MonoBehaviour {
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
                 {
                     rb.velocity = GetGravityDirection() * jumpForce * Time.deltaTime * 60;
-                    print("Jump");
+                    currRotation = SetAngle(angle);
                 }
             }
             //If Grounded Rotate Faster
@@ -81,9 +82,9 @@ public class PlayerMovement : MonoBehaviour {
             //If airborn lerp rotation
             //Store Rotation Quaternion
 
-            Vector3 rot = transform.eulerAngles;
+            Quaternion angleRotation = Quaternion.Euler(0, 0, angle);
 
-            transform.Rotate(0, 0, -angle);
+            transform.rotation = Quaternion.Slerp(currRotation, angleRotation, Time.deltaTime * rotSpeed);
         }
 
         //Left && Right Movement
@@ -131,5 +132,9 @@ public class PlayerMovement : MonoBehaviour {
 
     public void StopPlayer() {
         this.speed = 0;
+    }
+
+    public Quaternion SetAngle(float angle) {
+        return Quaternion.Euler(0, 0, angle);
     }
 }
