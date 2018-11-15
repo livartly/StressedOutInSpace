@@ -39,9 +39,8 @@ public class PlayerMovement : MonoBehaviour {
 	void FixedUpdate () {
 
         //Rotation Finding System
-        Vector3 relative = transform.InverseTransformPoint(planets[closestIndex].transform.position);
+        Vector3 relative = transform.InverseTransformPoint(planets[closestIndex].transform.position).normalized;
         var angle = Mathf.Atan2(relative.x, relative.y) * Mathf.Rad2Deg;
-
 
         //Hit Componet
         RaycastHit hit;
@@ -58,7 +57,7 @@ public class PlayerMovement : MonoBehaviour {
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
                 {
                     rb.velocity = GetGravityDirection() * jumpForce * Time.deltaTime * 60;
-                    currRotation = SetAngle(angle);
+                    currRotation = Quaternion.Euler(0, 0, 0);
                 }
             }
             //If Grounded Rotate Faster
@@ -82,9 +81,9 @@ public class PlayerMovement : MonoBehaviour {
             //If airborn lerp rotation
             //Store Rotation Quaternion
 
-            Quaternion angleRotation = Quaternion.Euler(0, 0, angle);
+            Quaternion angleRotation = Quaternion.Euler(0, 0, (-angle * Mathf.Deg2Rad));
 
-            transform.rotation = Quaternion.Slerp(currRotation, angleRotation, Time.deltaTime * rotSpeed);
+            transform.rotation = Quaternion.Lerp(transform.rotation, angleRotation, Time.deltaTime * rotSpeed);
         }
 
         //Left && Right Movement
@@ -99,6 +98,9 @@ public class PlayerMovement : MonoBehaviour {
         Gravity();
         //Check Closest Planet
         CheckClosestPlanet();
+
+        //Debug Rotation 
+        Debug.Log(angle);   
     }
 
     void Gravity() {
