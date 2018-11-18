@@ -10,10 +10,10 @@ public class MessageObject : MonoBehaviour {
     public AnxietyBarScript anxietyLvl;
     public ShowMessageScript textMessage;
     //on collition
-    private void OnCollisionEnter(Collision coll)
+    void OnTriggerEnter(Collider coll)
     {
         //if Player
-        if (coll.gameObject.tag == "Player")
+        if (coll.tag == "Player")
         {
             //Add Anxiety level
             anxietyLvl.AddAnxitey();

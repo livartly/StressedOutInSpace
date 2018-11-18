@@ -9,11 +9,10 @@ public class MugObject : MonoBehaviour {
 
     public AnxietyBarScript anxietyLvl;
 
-    //On collistion
-    private void OnCollisionEnter(Collision coll)
+    void OnTriggerEnter(Collider coll)
     {
         //if Player
-        if (coll.gameObject.tag == "Player")
+        if (coll.tag == "Player")
         {
             //Relieve Anxiety
             anxietyLvl.SubtractAnxitey();

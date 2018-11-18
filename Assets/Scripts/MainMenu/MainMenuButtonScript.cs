@@ -9,6 +9,11 @@ public class MainMenuButtonScript : MonoBehaviour {
         SceneManager.LoadScene("GameScene");
     }
 
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("StartMenu");
+    }
+
     public void Settings() {
         //
     }

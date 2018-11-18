@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour {
         if (Physics.Raycast(transform.position, -GetGravityDirection(), out hit, raycastLength, lm))
         {
             //if Grounded
-            if (hit.transform.tag == "Planet")
+            if (hit.transform.tag == "Planet" || hit.transform.tag == "ground")
             {
                 doubleJump = 1;
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour {
                 }
             }
             //If Grounded Rotate Faster
-            transform.Rotate(0, 0, -angle);
+            //transform.Rotate(0, 0, -angle);
         }
         else
         {
@@ -81,10 +81,12 @@ public class PlayerMovement : MonoBehaviour {
             //If airborn lerp rotation
             //Store Rotation Quaternion
 
-            Quaternion angleRotation = Quaternion.Euler(0, 0, (-angle * Mathf.Deg2Rad));
-
-            transform.rotation = Quaternion.Lerp(transform.rotation, angleRotation, Time.deltaTime * rotSpeed);
+            //Quaternion angleRotation = Quaternion.Euler(0, 0, (-angle * Mathf.Deg2Rad));
+            //transform.rotation = Quaternion.Lerp(transform.rotation, angleRotation, Time.deltaTime * rotSpeed);
         }
+
+        //Fix Rotation
+        transform.Rotate(0, 0, -angle);
 
         //Left && Right Movement
         //Movement input variable & Player Left and Right Movement
@@ -98,9 +100,6 @@ public class PlayerMovement : MonoBehaviour {
         Gravity();
         //Check Closest Planet
         CheckClosestPlanet();
-
-        //Debug Rotation 
-        Debug.Log(angle);   
     }
 
     void Gravity() {

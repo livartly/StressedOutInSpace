@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class WonScript : MonoBehaviour {
@@ -37,7 +38,7 @@ public class WonScript : MonoBehaviour {
             if (timer < 0)
             {
                 //Change to win screen
-                Debug.Log("You have won");
+                SceneManager.LoadScene("WinScreen");
             }
         }
     }

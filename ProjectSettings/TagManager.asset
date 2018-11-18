@@ -9,6 +9,8 @@ TagManager:
   - Planet
   - UI
   - Background
+  - ground
+  - Box
   layers:
   - Default
   - TransparentFX
@@ -25,8 +27,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - Bongocat
+  - Boxes
   - 
   - 
   - 
