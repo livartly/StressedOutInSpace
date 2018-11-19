@@ -16,6 +16,5 @@ public class CameraLocations : MonoBehaviour {
 
     public void UpdateCameraLocation(int val) {
         transformIndex = val;
-        print(val);
     }
 }
