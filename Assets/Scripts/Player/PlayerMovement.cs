@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour {
     private Vector3 movement = Vector3.zero;
 
     //Basic player settings
-    public float speed = 10, maxSpeed = 50, jumpForce = 10, gravity = 1, raycastLength = 8f, rotSpeed = 6;
+    public float maxSpeed = 50, gravity = 1, raycastLength = 8f, rotSpeed = 6;
     private float doubleJump = 1;
 
     //Layer Mask
@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour {
     private Quaternion currRotation;
 
     void Start () {
+
         //Grab the rigidbody componet
         rb = GetComponent<Rigidbody>();
 
@@ -56,7 +57,7 @@ public class PlayerMovement : MonoBehaviour {
                 doubleJump = 1;
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    rb.velocity = GetGravityDirection() * jumpForce * Time.deltaTime * 60;
+                    rb.velocity = GetGravityDirection() * PlayerManager.player.GetJumpForce() * Time.deltaTime * 60;
                     currRotation = Quaternion.Euler(0, 0, 0);
                 }
             }
@@ -66,7 +67,7 @@ public class PlayerMovement : MonoBehaviour {
         else
         {
             //If double jump > 0 allow for a jump
-            if (doubleJump > 0)
+            if (doubleJump > 0 )
             {
                 //Check for the jump input
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
@@ -74,10 +75,11 @@ public class PlayerMovement : MonoBehaviour {
                     //subtract the double jump ability number
                     doubleJump -= 1;
                     //Set velocity upwards
-                    rb.velocity = GetGravityDirection() * jumpForce * Time.deltaTime * 60;                      
+                    rb.velocity = GetGravityDirection() * PlayerManager.player.GetJumpForce() * Time.deltaTime * 60;                      
                     //print("Jump");
                 }
             }
+
             //If airborn lerp rotation
             //Store Rotation Quaternion
 
@@ -85,13 +87,17 @@ public class PlayerMovement : MonoBehaviour {
             //transform.rotation = Quaternion.Lerp(transform.rotation, angleRotation, Time.deltaTime * rotSpeed);
         }
 
-        //Fix Rotation
-        transform.Rotate(0, 0, -angle);
+        //If the player is dead we don't need this....
+        if (PlayerManager.player.GetHealth() >= 0)
+        {
+            //Fix Rotation
+            transform.Rotate(0, 0, -angle);
+        }
 
         //Left && Right Movement
         //Movement input variable & Player Left and Right Movement
         movement = new Vector3(Input.GetAxis("Horizontal") * Time.deltaTime, 0, 0);
-        rb.AddRelativeForce(-movement * speed * 60);
+        rb.AddRelativeForce(-movement * PlayerManager.player.GetSpeed() * 60);
 
         //Keep player zero'd on Z axis
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
@@ -99,7 +105,7 @@ public class PlayerMovement : MonoBehaviour {
         //Pull Towards Planet
         Gravity();
         //Check Closest Planet
-        CheckClosestPlanet();
+        CheckClosestPlanet();   
     }
 
     void Gravity() {
@@ -132,7 +138,8 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void StopPlayer() {
-        this.speed = 0;
+        PlayerManager.player.SetSpeed(0);
+        PlayerManager.player.SetJumpForce(0);
     }
 
     public Quaternion SetAngle(float angle) {
