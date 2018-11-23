@@ -18,7 +18,7 @@ public class PlayerDamageScript : MonoBehaviour {
         {
             Vector2 dir = (transform.position - coll.transform.position).normalized;
             print(dir);
-            rb.velocity = (dir * 15);
+            rb.velocity = (dir * 17);
             PlayerManager.player.TakeDamage();
             GameObject heart = Instantiate(heartSprite, transform.position, Quaternion.identity);
             heart.name = "Heart";

@@ -6,6 +6,7 @@ public class PlayerClass {
 
     private float speed, jumpForce;
     private int health;
+    private bool lost = false;
 
     //Constructor
     public PlayerClass(float speed, float jumpForce, int health) {
@@ -42,5 +43,15 @@ public class PlayerClass {
 
     public float GetJumpForce() {
         return this.jumpForce;
+    }
+
+    public void Lost() {
+        this.lost = true;
+        this.speed = 0;
+        this.jumpForce = 0;
+    }
+
+    public bool GetLost() {
+        return this.lost;
     }
 }

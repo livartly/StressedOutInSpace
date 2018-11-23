@@ -8,10 +8,13 @@ public class TrainCollider : MonoBehaviour {
 
     void OnCollisionEnter(Collision coll)
     {
-        if (coll.gameObject.tag == "Player")
+        if (PlayerManager.player.GetHealth() <= 0 || PlayerManager.player.GetLost())
         {
-            player.transform.parent = gameObject.transform;
-        }        
+            if (coll.gameObject.tag == "Player")
+            {
+                player.transform.parent = gameObject.transform;
+            }
+        }
     }
     private void OnCollisionExit(Collision collision)
     {

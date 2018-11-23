@@ -51,6 +51,7 @@ public class PlayerMovement : MonoBehaviour {
         //Check if Grounded
         if (Physics.Raycast(transform.position, -GetGravityDirection(), out hit, raycastLength, lm))
         {
+            Debug.Log(hit.transform.name);
             //if Grounded
             if (hit.transform.tag == "Planet" || hit.transform.tag == "ground")
             {
@@ -114,7 +115,7 @@ public class PlayerMovement : MonoBehaviour {
         rb.AddForce(holder);
 
         //Draw the gravity vector
-        Debug.DrawRay(transform.position, -GetGravityDirection() * 10f, Color.blue);
+        //Debug.DrawRay(transform.position, -GetGravityDirection() * 10f, Color.blue);
     }
 
     void CheckClosestPlanet() {

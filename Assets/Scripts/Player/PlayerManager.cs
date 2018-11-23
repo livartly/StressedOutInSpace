@@ -27,11 +27,18 @@ public class PlayerManager : MonoBehaviour {
         //If health is 0 or less
         if (player.GetHealth() <= 0)
         {
+            print("Player is Dead");
             //Player is dead !rip
             player.SetSpeed(0);
             player.SetJumpForce(0);
             rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.None;
             //Play ragdoll physics lol.
+        }
+        if (player.GetLost()) {
+            print("Player is spaced out");
+            //Player is Spaced Out
+            player.Lost();
+            rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.None;
         }
     }
 }

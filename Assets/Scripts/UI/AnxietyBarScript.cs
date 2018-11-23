@@ -20,7 +20,7 @@ public class AnxietyBarScript : MonoBehaviour {
         if (Mathf.RoundToInt(value) % 3 == 0)
         {
             value = 1;
-            anxiety.value += 1;
+            anxiety.value += 2;
         }
 
         //Handel Lost Condition
@@ -28,12 +28,13 @@ public class AnxietyBarScript : MonoBehaviour {
         {
             //Throw lose screen
             print("You have lost...");
+            PlayerManager.player.Lost();
         }
 	}
 
-    //Default Add = 25
+    //Default Add = 35
     public void AddAnxitey() {
-        anxiety.value += 25;
+        anxiety.value += 35;
     }
 
     //Overloaded Add Function pass argument for amt of anxitey gained
@@ -42,10 +43,10 @@ public class AnxietyBarScript : MonoBehaviour {
         anxiety.value += num;
     }
 
-    //Default Subtract = 25
+    //Default Subtract = 35
     public void SubtractAnxitey()
     {
-        anxiety.value -= 25;
+        anxiety.value -= 35;
     }
 
     //Overloaded Sub Function pass argument for amt of anxitey lost
