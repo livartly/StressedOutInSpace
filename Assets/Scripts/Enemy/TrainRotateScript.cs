@@ -12,6 +12,6 @@ public class TrainRotateScript : MonoBehaviour
 
     void Update()
     {
-        transform.RotateAround(planet.transform.position, axis, speed);
+        transform.RotateAround(planet.transform.position, axis, speed * Time.deltaTime * 60);
     }
 }
