@@ -9,14 +9,19 @@ public class WayPointsScript : MonoBehaviour {
 	
 	//Get all the transfrom of the waypoint - including the the parent
 	private Transform [] waypoints;
+
 	//Current waypoint index
 	private int int_wayIndex;
+
 	//Next waypoint index
 	private int int_nextIndex;
+
 	//Length of all waypoints
 	private int int_wayLength;
+
 	//Movement direction of the enemy to next waypoint
 	private Vector3 v3_direction;
+
 	//Checking if the enemy hit the waypoint
 	private bool b_isHitRadius;
 	
@@ -24,15 +29,15 @@ public class WayPointsScript : MonoBehaviour {
 	public void Awake() {
 		//Get all Transforms of the gameObject include the children and the transform of this gameObject
 		waypoints = gameObject.GetComponentsInChildren<Transform>();
+
 		//Set up the length of all transform
 		int_wayLength = waypoints.Length;
 		int_wayIndex = 0;
 		int_nextIndex = 1;
 
-		//so using the random index of waypoint
+		//random index of waypoint
 			int int_randomWay = (int) (Mathf.Floor(Random.value * int_wayLength));
-			//Checking to make sure that the waypoint length is more than 1
-			
+        
 			if (int_wayLength > 1) 
 			{
 
