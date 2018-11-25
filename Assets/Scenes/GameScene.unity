@@ -5221,9 +5221,7 @@ GameObject:
   - component: {fileID: 504174267}
   - component: {fileID: 504174266}
   - component: {fileID: 504174265}
-  - component: {fileID: 504174264}
   - component: {fileID: 504174263}
-  - component: {fileID: 504174269}
   m_Layer: 0
   m_Name: illuminati
   m_TagString: Untagged
@@ -5251,31 +5249,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &504174264
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 504174262}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.00013160706, y: 3.372383}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 104.170006, y: 104.170006}
-    newSize: {x: 104.170006, y: 104.170006}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 77.190216, y: 71.408554}
-  m_EdgeRadius: 0
 --- !u!114 &504174265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5363,28 +5336,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 504174262}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.1943862, y: 1.5240577, z: 0}
-  m_LocalScale: {x: 0.005, y: 0.005, z: 0.005}
+  m_LocalPosition: {x: 0, y: -0.08170168, z: 0}
+  m_LocalScale: {x: 0.02422669, y: 0.02422669, z: 0.02422669}
   m_Children: []
-  m_Father: {fileID: 1605901374}
-  m_RootOrder: 4
+  m_Father: {fileID: 1661642619}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &504174269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 504174262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78513c16f2b7e104eb0af0df6a166b77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  waypoint: {fileID: 0}
-  moveSpeed: 0.25
-  distanceToPlayer: 5
-  awayFromHome: 30
 --- !u!1 &511000286
 GameObject:
   m_ObjectHideFlags: 0
@@ -16342,7 +16299,7 @@ Transform:
   - {fileID: 2129758586}
   - {fileID: 1570085115}
   - {fileID: 1311455512}
-  - {fileID: 504174268}
+  - {fileID: 1661642619}
   - {fileID: 916475491}
   m_Father: {fileID: 1908488513}
   m_RootOrder: 1
@@ -16851,6 +16808,48 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1661642618
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1661642619}
+  - component: {fileID: 1661642620}
+  m_Layer: 0
+  m_Name: IlluminatiCollider
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1661642619
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1661642618}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.194387, y: 1.54092, z: 0}
+  m_LocalScale: {x: 0.20638394, y: 0.20638394, z: 0.20638394}
+  m_Children:
+  - {fileID: 504174268}
+  m_Father: {fileID: 1605901374}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1661642620
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1661642618}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.7638769, y: 1.7555876, z: 0.7488377}
+  m_Center: {x: -0.07087755, y: 0.047225475, z: 0.12558115}
 --- !u!1 &1662843957
 GameObject:
   m_ObjectHideFlags: 0

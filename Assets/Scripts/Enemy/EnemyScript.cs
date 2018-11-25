@@ -49,11 +49,5 @@ public class EnemyScript : MonoBehaviour {
         //This is where the rotation is controlled
         //transform.rotation = Quaternion.LookRotation(moveDir);//maipulate rotation, each time change direction, also moves rotation
     }
-	
-	void OnCollisionEnter(Collision col)
-	{
-		Debug.Log("uh oh");
-		
-	}
     
 }
