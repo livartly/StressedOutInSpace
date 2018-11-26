@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class WonScript : MonoBehaviour {
 
+    public FadeEffect fade;
+
     //Player movement reference
     public PlayerMovement player;
 
@@ -38,7 +40,7 @@ public class WonScript : MonoBehaviour {
             if (timer < 0)
             {
                 //Change to win screen
-                SceneManager.LoadScene("WinScreen");
+                fade.FadeOut(2);
             }
         }
     }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3515,7 +3515,7 @@ RectTransform:
   - {fileID: 24716818}
   - {fileID: 1717806333}
   m_Father: {fileID: 917873438}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -4332,8 +4332,8 @@ RectTransform:
   m_Children:
   - {fileID: 567937765}
   - {fileID: 1625694427}
-  - {fileID: 1392830268}
   - {fileID: 766686089}
+  - {fileID: 1392830268}
   - {fileID: 714897987}
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -11706,7 +11706,7 @@ RectTransform:
   - {fileID: 793136713}
   - {fileID: 1112118631}
   m_Father: {fileID: 917873438}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -14616,6 +14616,11 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114718082849883460, guid: 9992c23fc5bf740e5ac9d0472b86700c,
+        type: 2}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9992c23fc5bf740e5ac9d0472b86700c, type: 2}

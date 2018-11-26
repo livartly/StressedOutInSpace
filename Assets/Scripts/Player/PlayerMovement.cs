@@ -97,7 +97,10 @@ public class PlayerMovement : MonoBehaviour {
         //Left && Right Movement
         //Movement input variable & Player Left and Right Movement
         movement = new Vector3(Input.GetAxis("Horizontal") * Time.deltaTime, 0, 0);
-        rb.AddRelativeForce(-movement * PlayerManager.player.GetSpeed() * 60);
+        if (rb.velocity.magnitude < PlayerManager.player.GetMaxSpeed())
+        {
+            rb.AddRelativeForce(-movement * PlayerManager.player.GetSpeed() * 60);
+        }
 
         //Keep player zero'd on Z axis
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);

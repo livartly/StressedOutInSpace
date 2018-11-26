@@ -14,8 +14,8 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: DefaultCompany
   productName: StressedOutInSpace
-  defaultCursor: {fileID: 0}
-  cursorHotspot: {x: 0, y: 0}
+  defaultCursor: {fileID: 2800000, guid: 3705aabb4ce74d343a6efb2f234a5b95, type: 3}
+  cursorHotspot: {x: 0, y: -6}
   m_SplashScreenBackgroundColor: {r: 0.023529414, g: 0.09411766, b: 0.20000002, a: 1}
   m_ShowUnitySplashScreen: 1
   m_ShowUnitySplashLogo: 1

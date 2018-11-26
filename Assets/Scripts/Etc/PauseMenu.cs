@@ -18,17 +18,20 @@ public class PauseMenu : MonoBehaviour {
 
     void Update () {
         if (Input.GetKeyDown(KeyCode.Escape)) {
+
             isPaused = !isPaused;
+
             if (isPaused)
                 Resume();
             else
                 Pause();
         }
-	}
+    }
 
     public void Resume() {
         pausedUIPanel.SetActive(false);
         Time.timeScale = 1;
+        isPaused = true;
     }
 
     void Pause() {

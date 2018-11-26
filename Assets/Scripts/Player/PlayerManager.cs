@@ -6,7 +6,7 @@ public class PlayerManager : MonoBehaviour {
 
     //Some Dank OOP allocation
     public static PlayerClass player = new PlayerClass(10, 10, 3);
-    public float speed = 10, jumpForce = 10;
+    public float speed = 10, jumpForce = 10, maxSpeed = 15;
     public int health = 3;
 
     //Rigidbody effects
@@ -17,6 +17,7 @@ public class PlayerManager : MonoBehaviour {
         player.SetSpeed(speed);
         player.SetHealth(health);
         player.SetJumpForce(jumpForce);
+        player.SetMaxSpeed(maxSpeed);
 
         //Get the rigidbody componet
         rb = GetComponent<Rigidbody>();

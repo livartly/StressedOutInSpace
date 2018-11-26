@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerClass {
 
-    private float speed, jumpForce;
+    private float speed, jumpForce, maxSpeed;
     private int health;
     private bool lost = false;
 
@@ -53,5 +53,13 @@ public class PlayerClass {
 
     public bool GetLost() {
         return this.lost;
+    }
+
+    public float GetMaxSpeed() {
+        return this.maxSpeed;
+    }
+
+    public void SetMaxSpeed(float val) {
+        this.maxSpeed = val;
     }
 }
