@@ -6,7 +6,11 @@ public class PlayerDamageScript : MonoBehaviour {
 
     //Heart rigidbody prefab
     public GameObject heartSprite;
+    public float coolDownTimer = 3f;
+
     private Rigidbody rb;
+    private float timer = -99;
+    private bool immune = false;
 
     void Start() {
         rb = GetComponent<Rigidbody>();
@@ -14,15 +18,36 @@ public class PlayerDamageScript : MonoBehaviour {
 
     void OnCollisionEnter(Collision coll)
     {
-        if (coll.gameObject.tag == "Enemy")
+        if (coll.gameObject.tag == "Enemy" && !immune)
         {
             Vector2 dir = (transform.position - coll.transform.position).normalized;
-            print(dir);
             rb.velocity = (dir * 17);
-            PlayerManager.player.TakeDamage();
-            GameObject heart = Instantiate(heartSprite, transform.position, Quaternion.identity);
-            heart.name = "Heart";
-            Destroy(heart, 6);
+            if (PlayerManager.player.GetHealth() > 0)
+            {
+                immune = true;
+                timer = coolDownTimer;
+                PlayerManager.player.TakeDamage();
+                GameObject heart = Instantiate(heartSprite, transform.position, Quaternion.identity);
+                heart.name = "Heart";
+                Destroy(heart, 6);
+            }
+        }
+    }
+    void OnCollisionStay(Collision coll)
+    {
+        if (coll.gameObject.tag == "Enemy" && !immune)
+        {
+            Vector2 dir = (transform.position - coll.transform.position).normalized;
+            rb.velocity = (dir * 17);
+            if (PlayerManager.player.GetHealth() > 0)
+            {
+                immune = true;
+                timer = coolDownTimer;
+                PlayerManager.player.TakeDamage();
+                GameObject heart = Instantiate(heartSprite, transform.position, Quaternion.identity);
+                heart.name = "Heart";
+                Destroy(heart, 6);
+            }
         }
     }
 
@@ -34,4 +59,11 @@ public class PlayerDamageScript : MonoBehaviour {
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (timer >= 0)
+            timer -= Time.deltaTime;
+        if (timer < 0)
+            immune = false;
+    }
 }

@@ -51,7 +51,6 @@ public class PlayerMovement : MonoBehaviour {
         //Check if Grounded
         if (Physics.Raycast(transform.position, -GetGravityDirection(), out hit, raycastLength, lm))
         {
-            Debug.Log(hit.transform.name);
             //if Grounded
             if (hit.transform.tag == "Planet" || hit.transform.tag == "ground")
             {

@@ -8,7 +8,7 @@ public class TrainCollider : MonoBehaviour {
 
     void OnCollisionEnter(Collision coll)
     {
-        if (PlayerManager.player.GetHealth() <= 0 || PlayerManager.player.GetLost())
+        if (PlayerManager.player.GetHealth() >= 0 || !PlayerManager.player.GetLost())
         {
             if (coll.gameObject.tag == "Player")
             {

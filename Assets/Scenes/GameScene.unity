@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.574817, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5223,32 +5223,24 @@ GameObject:
   - component: {fileID: 504174265}
   - component: {fileID: 504174263}
   m_Layer: 0
-  m_Name: illuminati
-  m_TagString: Untagged
+  m_Name: Illuminati
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!50 &504174263
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!65 &504174263
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 504174262}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 104.17002, y: 104.17002, z: 50}
+  m_Center: {x: 0.000030517578, y: 0.000076293945, z: 0}
 --- !u!114 &504174265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5336,11 +5328,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 504174262}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.08170168, z: 0}
-  m_LocalScale: {x: 0.02422669, y: 0.02422669, z: 0.02422669}
+  m_LocalPosition: {x: -1.69, y: -2.33, z: 0}
+  m_LocalScale: {x: 0.0050000004, y: 0.0050000004, z: 0.0050000004}
   m_Children: []
-  m_Father: {fileID: 1661642619}
-  m_RootOrder: 0
+  m_Father: {fileID: 1605901374}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &511000286
 GameObject:
@@ -10114,7 +10106,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -10130,7 +10122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.96055627, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.9607843, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -14789,7 +14781,7 @@ GameObject:
   - component: {fileID: 1445267864}
   - component: {fileID: 1445267865}
   m_Layer: 5
-  m_Name: Anxiety - Dont Move
+  m_Name: Anxiety (Dont Move Pls)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16299,7 +16291,7 @@ Transform:
   - {fileID: 2129758586}
   - {fileID: 1570085115}
   - {fileID: 1311455512}
-  - {fileID: 1661642619}
+  - {fileID: 504174268}
   - {fileID: 916475491}
   m_Father: {fileID: 1908488513}
   m_RootOrder: 1
@@ -16808,48 +16800,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1661642618
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1661642619}
-  - component: {fileID: 1661642620}
-  m_Layer: 0
-  m_Name: IlluminatiCollider
-  m_TagString: Enemy
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1661642619
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1661642618}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.194387, y: 1.54092, z: 0}
-  m_LocalScale: {x: 0.20638394, y: 0.20638394, z: 0.20638394}
-  m_Children:
-  - {fileID: 504174268}
-  m_Father: {fileID: 1605901374}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1661642620
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1661642618}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.7638769, y: 1.7555876, z: 0.7488377}
-  m_Center: {x: -0.07087755, y: 0.047225475, z: 0.12558115}
 --- !u!1 &1662843957
 GameObject:
   m_ObjectHideFlags: 0
@@ -16899,6 +16849,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ade6f6ff46a2b443b891c3d4f377bc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startColor: {r: 0.93412864, g: 1, b: 0, a: 1}
+  finishColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1668986531
 GameObject:
   m_ObjectHideFlags: 0
@@ -17679,7 +17631,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.729653, y: 2.4664624, z: 0.5}
+  m_Size: {x: 5.729653, y: 2.4664624, z: 1}
   m_Center: {x: 0.2645779, y: -1.4924036, z: 0}
 --- !u!1 &1737547800
 GameObject:
@@ -21933,6 +21885,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heartSprite: {fileID: 1349440506245082, guid: 6078142ed1f15ef4f8af6cf5b09a10de,
     type: 2}
+  coolDownTimer: 2.3
 --- !u!114 &2127404167
 MonoBehaviour:
   m_ObjectHideFlags: 0

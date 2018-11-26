@@ -36,7 +36,6 @@ public class ShowMessageScript : MonoBehaviour {
     }
 
     public void ShowMessage() {
-        print("Text Message");
         timer = displayTime;
         indexOfSprite = Random.Range(0, sprites.Length-1);
         show = true;

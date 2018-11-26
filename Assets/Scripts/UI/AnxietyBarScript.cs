@@ -7,12 +7,20 @@ public class AnxietyBarScript : MonoBehaviour {
 
     private Slider anxiety;
     private float value = 1;
+    private Image fillColor;
+
+    public Color startColor = Color.green, finishColor = Color.red;
+    //2-0
+
     void Start() {
         anxiety = transform.GetChild(0).GetComponent<Slider>();
+        fillColor = transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>();
     }
 
-	void Update () {  
-        
+	void Update () {
+
+        fillColor.color = Color.Lerp(startColor, finishColor, anxiety.value/anxiety.maxValue);
+
         //Count Seconds
         value += Time.deltaTime;
 
