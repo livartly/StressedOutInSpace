@@ -85,7 +85,7 @@ public class PlayerMovement : MonoBehaviour {
                     //subtract the double jump ability number
                     doubleJump -= 1;
                     //Set velocity upwards
-                    rb.velocity = GetGravityDirection() * PlayerManager.player.GetJumpForce() * Time.deltaTime * 60;                      
+                    rb.velocity = GetGravityDirection() * PlayerManager.player.GetJumpForce() * Time.deltaTime * 60;
                 }
             }
 
