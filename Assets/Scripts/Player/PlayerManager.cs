@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour {
 
+    public Animator anim;
+
     //Some Dank OOP allocation
     public static PlayerClass player = new PlayerClass(10, 10, 3);
     public float speed = 10, jumpForce = 10, maxSpeed = 15;
@@ -13,6 +15,9 @@ public class PlayerManager : MonoBehaviour {
     private Rigidbody rb;
 
     void Start () {
+        //Get animation Component
+        anim = GetComponent<Animator>();
+
         //Set Defaults
         player.SetSpeed(speed);
         player.SetHealth(health);
@@ -33,7 +38,10 @@ public class PlayerManager : MonoBehaviour {
             player.SetSpeed(0);
             player.SetJumpForce(0);
             rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.None;
-            //Play ragdoll physics lol.
+
+            //Death animation NOT WORKING
+            anim.Play("death");
+            
         }
         if (player.GetLost()) {
             print("Player is spaced out");
