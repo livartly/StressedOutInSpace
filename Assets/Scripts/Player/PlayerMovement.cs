@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
-
+public class PlayerMovement : MonoBehaviour
+{
     public Animator anim;
 
     //Private
@@ -22,13 +22,16 @@ public class PlayerMovement : MonoBehaviour {
     private int closestIndex;
     private Quaternion currRotation;
 
-    void Start () {
+    //Particle System reference
+    public ParticleSystem PS;
+    public float jetPackTimer = 1;
 
+    void Start()
+    {
         //Get animation component
         anim = GetComponent<Animator>();
-
-
-        //Grab the rigidbody component
+        
+        //Grab the rigidbody componet
         rb = GetComponent<Rigidbody>();
 
         //Invert Layermask Selection
@@ -42,8 +45,9 @@ public class PlayerMovement : MonoBehaviour {
             planets[i] = numOfPlanets[i];
         }
     }
-	
-	void FixedUpdate () {
+
+    void FixedUpdate()
+    {
 
         //Rotation Finding System
         Vector3 relative = transform.InverseTransformPoint(planets[closestIndex].transform.position).normalized;
@@ -63,8 +67,14 @@ public class PlayerMovement : MonoBehaviour {
                 doubleJump = 1;
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    //SHOULD PLAY JUMP HERE
+                    //Jump animation NOT WORKING 
                     anim.Play("jump");
+
+                    //Jump Particle System
+                    StartCoroutine(Jetpack(jetPackTimer));
+                    PS.Play();
+
+                    //Jump Physics
                     rb.velocity = GetGravityDirection() * PlayerManager.player.GetJumpForce() * Time.deltaTime * 60;
                     currRotation = Quaternion.Euler(0, 0, 0);
                 }
@@ -75,17 +85,23 @@ public class PlayerMovement : MonoBehaviour {
         else
         {
             //If double jump > 0 allow for a jump
-            if (doubleJump > 0 )
+            if (doubleJump > 0)
             {
                 //Check for the jump input
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    //SHOULD PLAY JUMP HERE
+                    //Jump animation NOT WORKING 
                     anim.Play("jump");
+
+                    //Jump Particle System
+                    StartCoroutine(Jetpack(jetPackTimer));
+                    PS.Play();
+
                     //subtract the double jump ability number
                     doubleJump -= 1;
                     //Set velocity upwards
                     rb.velocity = GetGravityDirection() * PlayerManager.player.GetJumpForce() * Time.deltaTime * 60;
+                    //print("Jump");
                 }
             }
 
@@ -108,8 +124,9 @@ public class PlayerMovement : MonoBehaviour {
         movement = new Vector3(Input.GetAxis("Horizontal") * Time.deltaTime, 0, 0);
         if (rb.velocity.magnitude < PlayerManager.player.GetMaxSpeed())
         {
-            //SHOULD PLAY WALK HERE
+            //Walk animation NOT WORKING
             anim.Play("walk");
+
             rb.AddRelativeForce(-movement * PlayerManager.player.GetSpeed() * 60);
         }
 
@@ -119,10 +136,11 @@ public class PlayerMovement : MonoBehaviour {
         //Pull Towards Planet
         Gravity();
         //Check Closest Planet
-        CheckClosestPlanet();   
+        CheckClosestPlanet();
     }
 
-    void Gravity() {
+    void Gravity()
+    {
         //Move towards ground
         var holder = -GetGravityDirection() * gravity * Time.deltaTime * 60;
         rb.AddForce(holder);
@@ -131,7 +149,8 @@ public class PlayerMovement : MonoBehaviour {
         //Debug.DrawRay(transform.position, -GetGravityDirection() * 10f, Color.blue);
     }
 
-    void CheckClosestPlanet() {
+    void CheckClosestPlanet()
+    {
 
         float distance = 9999;
 
@@ -145,18 +164,28 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    Vector3 GetGravityDirection() {
+    Vector3 GetGravityDirection()
+    {
         //Find Gravity Direction
-        Vector3 gravityDir = (this.transform.position - planets[closestIndex].transform.position).normalized;       
+        Vector3 gravityDir = (this.transform.position - planets[closestIndex].transform.position).normalized;
         return gravityDir;
     }
 
-    public void StopPlayer() {
+    public void StopPlayer()
+    {
         PlayerManager.player.SetSpeed(0);
         PlayerManager.player.SetJumpForce(0);
     }
 
-    public Quaternion SetAngle(float angle) {
+    Quaternion SetAngle(float angle)
+    {
         return Quaternion.Euler(0, 0, angle);
+    }
+
+    IEnumerator Jetpack(float val)
+    {
+        yield return new WaitForSeconds(val);
+        PS.Stop();
+        StopCoroutine("Jetpack()");
     }
 }
