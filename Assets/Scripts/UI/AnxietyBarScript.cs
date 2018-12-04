@@ -15,6 +15,7 @@ public class AnxietyBarScript : MonoBehaviour {
     void Start() {
         anxiety = transform.GetChild(0).GetComponent<Slider>();
         fillColor = transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>();
+        anxiety.value = 0;
     }
 
 	void Update () {

@@ -155,8 +155,13 @@ public class PlayerMovement : MonoBehaviour
                 SwapDirection();
         }
 
+        if (PlayerManager.player.GetLost())
+        {
+            rb = null;
+        }
+
         //If Player is dead
-        if (PlayerManager.player.GetHealth() <= 0)
+        if (PlayerManager.player.GetHealth() <= 0 || PlayerManager.player.GetLost())
         {
             anim.Play("death");
         }

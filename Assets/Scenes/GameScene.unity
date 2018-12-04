@@ -7744,7 +7744,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fade: {fileID: 1598319900}
-  player: {fileID: 0}
+  player: {fileID: 951903927}
   timer: 3
 --- !u!65 &649586375
 BoxCollider:
@@ -22190,7 +22190,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 936401814}
   m_HandleRect: {fileID: 0}

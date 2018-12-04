@@ -17,6 +17,14 @@ public class PlayerManager : MonoBehaviour {
     public FadeEffect fader;
 
     void Start () {
+
+        hasLost = false;
+
+        if (player == null)
+        {
+            player = new PlayerClass(10, 10, 3);
+        }
+
         //Set Defaults
         player.SetSpeed(speed);
         player.SetHealth(health);
@@ -50,10 +58,11 @@ public class PlayerManager : MonoBehaviour {
 
         if (timer < 0 && hasLost)
         {
+            player = null;
             fader.FadeOut(3);
         }
 
-        if (player.GetLost() || player.GetHealth() <= 0 && timer < 0)
+        if (player.GetLost() && timer < 0 || player.GetHealth() <= 0 && timer < 0)
         {
             print("Test");
             timer = 4;
