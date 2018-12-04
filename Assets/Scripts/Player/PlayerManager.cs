@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour {
 
-    public Animator anim;
-
     //Some Dank OOP allocation
     public static PlayerClass player = new PlayerClass(10, 10, 3);
     public float speed = 10, jumpForce = 10, maxSpeed = 15;
@@ -13,11 +11,12 @@ public class PlayerManager : MonoBehaviour {
 
     //Rigidbody effects
     private Rigidbody rb;
+    private float timer = -99;
+    private bool hasLost = false;
+
+    public FadeEffect fader;
 
     void Start () {
-        //Get animation Component
-        anim = GetComponent<Animator>();
-
         //Set Defaults
         player.SetSpeed(speed);
         player.SetHealth(health);
@@ -38,16 +37,27 @@ public class PlayerManager : MonoBehaviour {
             player.SetSpeed(0);
             player.SetJumpForce(0);
             rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.None;
-
-            //Death animation NOT WORKING
-            anim.Play("death");
-            
         }
         if (player.GetLost()) {
             print("Player is spaced out");
             //Player is Spaced Out
             player.Lost();
             rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.None;
+        }
+
+        if (timer >= 0)
+            timer -= Time.deltaTime;
+
+        if (timer < 0 && hasLost)
+        {
+            fader.FadeOut(3);
+        }
+
+        if (player.GetLost() || player.GetHealth() <= 0 && timer < 0)
+        {
+            print("Test");
+            timer = 4;
+            hasLost = true;
         }
     }
 }

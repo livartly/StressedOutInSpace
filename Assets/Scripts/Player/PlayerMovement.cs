@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public Animator anim;
+    public GameObject playerCharacter;
+    private bool facingRight = false;
 
     //Private
     private Rigidbody rb;
@@ -27,10 +29,7 @@ public class PlayerMovement : MonoBehaviour
     public float jetPackTimer = 1;
 
     void Start()
-    {
-        //Get animation component
-        anim = GetComponent<Animator>();
-        
+    {       
         //Grab the rigidbody componet
         rb = GetComponent<Rigidbody>();
 
@@ -48,7 +47,6 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-
         //Rotation Finding System
         Vector3 relative = transform.InverseTransformPoint(planets[closestIndex].transform.position).normalized;
         var angle = Mathf.Atan2(relative.x, relative.y) * Mathf.Rad2Deg;
@@ -123,10 +121,7 @@ public class PlayerMovement : MonoBehaviour
         //Movement input variable & Player Left and Right Movement
         movement = new Vector3(Input.GetAxis("Horizontal") * Time.deltaTime, 0, 0);
         if (rb.velocity.magnitude < PlayerManager.player.GetMaxSpeed())
-        {
-            //Walk animation NOT WORKING
-            anim.Play("walk");
-
+        {            
             rb.AddRelativeForce(-movement * PlayerManager.player.GetSpeed() * 60);
         }
 
@@ -137,6 +132,34 @@ public class PlayerMovement : MonoBehaviour
         Gravity();
         //Check Closest Planet
         CheckClosestPlanet();
+
+
+        //Check if Grounded
+        if (Physics.Raycast(transform.position, -GetGravityDirection(), out hit, raycastLength, lm))
+        {
+            //if Grounded
+            if (hit.transform.tag == "Planet" || hit.transform.tag == "ground" && PlayerManager.player.GetHealth() > 0)
+            {
+                //If player is walking
+                if (rb.velocity.magnitude > 0.3f)
+                    anim.Play("walk");
+                else
+                    anim.Play("idle");
+            }
+
+            var local_X_Velocity= transform.InverseTransformDirection(rb.velocity);
+            if (movement.magnitude > 0.0001)
+            if (local_X_Velocity.x > -.3 && !facingRight)
+                SwapDirection();
+            else if (local_X_Velocity.x < .3 && facingRight)
+                SwapDirection();
+        }
+
+        //If Player is dead
+        if (PlayerManager.player.GetHealth() <= 0)
+        {
+            anim.Play("death");
+        }
     }
 
     void Gravity()
@@ -187,5 +210,12 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(val);
         PS.Stop();
         StopCoroutine("Jetpack()");
+    }
+
+    void SwapDirection() {
+        facingRight = !facingRight;
+        var temp = playerCharacter.transform.localScale;
+        temp.x *= -1;
+        playerCharacter.transform.localScale = temp;
     }
 }
