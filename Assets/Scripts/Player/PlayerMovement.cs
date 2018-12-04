@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 
-    //Private boiiis
+    public Animator anim;
+
+    //Private
     private Rigidbody rb;
     private Vector3 movement = Vector3.zero;
 
@@ -22,7 +24,11 @@ public class PlayerMovement : MonoBehaviour {
 
     void Start () {
 
-        //Grab the rigidbody componet
+        //Get animation component
+        anim = GetComponent<Animator>();
+
+
+        //Grab the rigidbody component
         rb = GetComponent<Rigidbody>();
 
         //Invert Layermask Selection
@@ -57,6 +63,8 @@ public class PlayerMovement : MonoBehaviour {
                 doubleJump = 1;
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
                 {
+                    //SHOULD PLAY JUMP HERE
+                    anim.Play("jump");
                     rb.velocity = GetGravityDirection() * PlayerManager.player.GetJumpForce() * Time.deltaTime * 60;
                     currRotation = Quaternion.Euler(0, 0, 0);
                 }
@@ -72,11 +80,12 @@ public class PlayerMovement : MonoBehaviour {
                 //Check for the jump input
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
                 {
+                    //SHOULD PLAY JUMP HERE
+                    anim.Play("jump");
                     //subtract the double jump ability number
                     doubleJump -= 1;
                     //Set velocity upwards
                     rb.velocity = GetGravityDirection() * PlayerManager.player.GetJumpForce() * Time.deltaTime * 60;                      
-                    //print("Jump");
                 }
             }
 
@@ -99,6 +108,8 @@ public class PlayerMovement : MonoBehaviour {
         movement = new Vector3(Input.GetAxis("Horizontal") * Time.deltaTime, 0, 0);
         if (rb.velocity.magnitude < PlayerManager.player.GetMaxSpeed())
         {
+            //SHOULD PLAY WALK HERE
+            anim.Play("walk");
             rb.AddRelativeForce(-movement * PlayerManager.player.GetSpeed() * 60);
         }
 
